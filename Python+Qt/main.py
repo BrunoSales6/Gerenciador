@@ -12,9 +12,14 @@ def resource_path(relative_path): #função do py-to-exe
 
 # Carregando Interface e criando uma classe a parti dela
 FORM_CLASS, _ = loadUiType(resource_path("GUI.ui"))
+# O caracter '_' faz com que a seguunda classe cirada pelo loadUiType seja ignorada. 
+# A primeira classe contém todos os widgets e layouts definidos no Qt Designer.
+# A segunda classe é apenas uma classe Qt que serve commo base para interface.
 
 
 # Classe Main que define tudo da interface.
+# A class Main herda tudo da FORM_CLASS e da QMainWindow.
+#A QMainWindow tem todos os elemetos básicos de uma interface.
 class Main(QMainWindow, FORM_CLASS):
     def __init__(self):
         super(Main, self).__init__()
@@ -221,10 +226,10 @@ class Main(QMainWindow, FORM_CLASS):
 
 
 def main():  # Esta função instância a classe Main e roda o app ela num loop.
-    app = QApplication(sys.argv)
-    window = Main()
-    window.show()
-    app.exec()
+    app = QApplication(sys.argv) #QApplication é a classe que gerencia a aplicação GUI. Ela precisa ser instanciada antes de qualquer widget Qt ser criado.
+    window = Main() #cria a tela e carrega todos os elementos visuais.
+    window.show() #deixa a tela visível.
+    app.exec() #Entra no loop de eventos principal da aplicação, que é necessário para que a aplicação responda a eventos do usuário.
 
 
 if __name__ == "__main__":  # garante que o script só rode no arquivo princiapl.
